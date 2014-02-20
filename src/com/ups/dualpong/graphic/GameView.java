@@ -6,6 +6,7 @@ package com.ups.dualpong.graphic;
 import com.ups.dualpong.game.Ball;
 import com.ups.dualpong.game.Gauge;
 import com.ups.dualpong.game.Racket;
+import com.ups.dualpong.interactions.TouchListener;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,7 +21,7 @@ import android.widget.ImageView;
  * @author SERIN Kevin
  *
  */
-public class GameView extends ImageView {
+public class GameView extends ImageView implements TouchListener {
 	private static final int TIME_REFRESH = 50;
 	private Handler refreshHandler;
 	private Runnable invalidatorRunnable;
@@ -85,6 +86,16 @@ public class GameView extends ImageView {
 		if(this.racket != null) {
 			this.racket.drawOnCanvas(canvas);
 		}
+	}
+	
+	@Override
+	public void touchDown() {
+		Log.d("graphic", "toucheDown");
+	}
+
+	@Override
+	public void touchUp() {
+		Log.d("graphic", "toucheUp");
 	}
 	
 }
