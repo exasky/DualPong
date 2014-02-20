@@ -51,7 +51,7 @@ public class BallEngine {
 
 		float newAngle;
 
-		float anglePerStep = 90 / racketSize;
+		float anglePerStep = 90f / racketSize;
 		float rightSidePosition = racketPosition + racketSize / 2;
 		float ballRacketDistance = Math.abs(ballXPosition - rightSidePosition);
 
