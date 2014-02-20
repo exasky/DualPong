@@ -43,8 +43,8 @@ public class BallEngine {
 		return newAngle;
 	}
 
-	public static float getNewAngleOnRacketBounce(float ballAngle,
-			int ballXPosition, int racketPosition, int racketSize) {
+	public static float getNewAngleOnRacketBounce(int ballXPosition,
+			int racketPosition, int racketSize) {
 
 		// newAngle = 45 + nbrePas(ballPos, rightSideOfRacket)*AngleParPas)
 		// 45 c'est l'angle renvoye tout a droite de la racket
