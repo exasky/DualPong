@@ -16,14 +16,4 @@
         android:layout_marginTop="85dp"
         android:text="Waiting for Bluetooth connection ... " />
 
-    <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="77dp"
-        android:onClick="cancelMethod"
-        android:text="Cancel" />
-
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.ups.dualpong;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -34,7 +35,7 @@ public class JoinActivity extends Activity {
 
             int i=0;
             for (BluetoothDevice device : pairedDevices) {
-                devicesStr[i] = device.getName()+" "+device.getAddress();
+                devicesStr[i] = device.getName()+" ;"+device.getAddress();
                 i++;
             }
             ARadapter = new ArrayAdapter<String>(this,
@@ -61,10 +62,13 @@ public class JoinActivity extends Activity {
 
     public void connectDevice(AdapterView<?> adapterView, View view, int i, long l){
         String dev = (String)adapterView.getAdapter().getItem(i);
+        dev = dev.split(";")[1];
 
-        BluetoothDevice device = BTadapter.getRemoteDevice(dev.split(" ")[1]);
+        BluetoothDevice device = BTadapter.getRemoteDevice(dev);
 
         BluetoothClient BTclient = new BluetoothClient(device, BTadapter, this);
         BTclient.start();
+//        Intent intent = new Intent(this, GameActivity.class);
+//        startActivity(intent);
     }
 }

@@ -96,10 +96,6 @@ public class BluetoothServer extends Thread {
 	}
 
 
-
-
-
-
     public void sendBall(Ball b){
         byte[] tmp = b.serialize();
         try {

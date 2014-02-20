@@ -52,9 +52,9 @@ public class GameActivity extends Activity implements SensorEventListener {
         BTserver = BluetoothServer.getInstance();
         BTclient = BluetoothClient.getInstance();
         if (BTserver != null){
-            current = PlayerType.server;
-        }else{
-            current = PlayerType.server;
+                current = PlayerType.server;
+            }else{
+                current = PlayerType.client;
         }
 	}
 	

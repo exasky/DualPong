@@ -21,6 +21,7 @@ public class CreateActivity extends Activity {
         BTserver = new BluetoothServer(adaptater,this);
         BTserver.start();
 
+
 	}
 
 	@Override
