@@ -18,7 +18,7 @@
         android:src="@drawable/logo" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
@@ -30,7 +30,7 @@
         android:id="@+id/buttonJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/buttonCancel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:onClick="joinMethod"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/buttonCredit"
-        android:layout_toRightOf="@+id/button1"
+        android:layout_toRightOf="@+id/buttonCancel"
         android:onClick="exitMethod"
         android:text="Quitter" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button2"
         android:layout_marginTop="16dp"
-        android:layout_toLeftOf="@+id/button1"
+        android:layout_toLeftOf="@+id/buttonCancel"
         android:onClick="creditMethod"
         android:text="Credits" />
 
