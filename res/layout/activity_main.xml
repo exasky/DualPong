@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button3"
         android:layout_toRightOf="@+id/button1"
+        android:onClick="exitMethod"
         android:text="Quitter" />
 
     <Button
