@@ -61,8 +61,48 @@ public class BallEngine {
 
 	}
 
-	public static float getNewAngleOnDeviceChanged(int ballAngle) {
-
+	public static float getNewAngleOnDeviceChanged(float ballAngle) {
 		return -ballAngle;
+	}
+
+	public static int[] getNextPosition(int x, int y, float ballAngle,
+			float ballSpeed) {
+
+		int[] newVals = new int[2];
+
+		// Si la balle monte
+		if (ballAngle > 0) {
+			if (ballAngle == 90) {
+				newVals[0] = x;
+				newVals[1] = y - 1;
+			} else if (ballAngle < 90) {
+				double cos = Math.cos(ballAngle);
+				double sin = Math.sin(ballAngle);
+				newVals[0] = (int) (x + cos * ballSpeed);
+				newVals[1] = (int) (y - sin * ballSpeed);
+			} else if (ballAngle > 90) {
+				double cos = Math.cos(180 - ballAngle);
+				double sin = Math.sin(180 - ballAngle);
+				newVals[0] = (int) (x - cos * ballSpeed);
+				newVals[1] = (int) (y - sin * ballSpeed);
+			}
+		} else if (ballAngle < 0) {
+			if (ballAngle == -90) {
+				newVals[0] = x;
+				newVals[1] = y + 1;
+			} else if (ballAngle < 90) {
+				double cos = Math.cos(-ballAngle);
+				double sin = Math.sin(-ballAngle);
+				newVals[0] = (int) (x - cos * ballSpeed);
+				newVals[1] = (int) (y + sin * ballSpeed);
+			} else if (ballAngle > 90) {
+				double cos = Math.cos(180 - ballAngle);
+				double sin = Math.sin(180 - ballAngle);
+				newVals[0] = (int) (x + cos * ballSpeed);
+				newVals[1] = (int) (y + sin * ballSpeed);
+			}
+		}
+
+		return newVals;
 	}
 }
