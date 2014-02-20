@@ -5,7 +5,11 @@ public class Gauge {
 	public static final int MIN = 0;
 	public static final int MAX = 100;
 
-	private int current;
+	protected int current;
+	
+	public Gauge() {
+		this.current = 0;
+	}
 
 	public int getCurrent() {
 		return current;

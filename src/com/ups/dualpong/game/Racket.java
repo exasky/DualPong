@@ -1,8 +1,13 @@
 package com.ups.dualpong.game;
 
 public class Racket {
-	private int x;
-	private int size;
+	protected int x;
+	protected int size;
+	
+	public Racket(int x, int size) {
+		this.x = x;
+		this.size = size;
+	}
 
 	public int getX() {
 		return this.x;
