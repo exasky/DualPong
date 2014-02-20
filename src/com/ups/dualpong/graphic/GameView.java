@@ -22,12 +22,14 @@ import android.widget.ImageView;
  *
  */
 public class GameView extends ImageView implements TouchListener, InclinationListener {
-	private static final int TIME_REFRESH = 50;
+	private static final int TIME_REFRESH = 10;
 	private Handler refreshHandler;
 	private Runnable invalidatorRunnable;
 	private GraphicBall ball;
 	private GraphicGauge gauge;
 	private GraphicRacket racket;
+	private int limitLeft;
+	private int limitRight;
 	private boolean isTouching;
 	private Integer width = null;
 	private Integer height = null;
@@ -42,8 +44,6 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 				invalidate();
 			}
 		};
-		
-		//this.initGraphicalElements();
 	}
 	
 	@Override
@@ -64,6 +64,8 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 		if(this.width == null || this.height == null) {	// first initialization of the screen
 			this.width = w;
 			this.height = h;
+			this.limitLeft = 40;
+			this.limitRight = width - 5;
 			this.initGraphicalElements();
 		}
 	}
@@ -82,8 +84,10 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	private void drawGame(Canvas canvas) {
 		Paint background = new Paint();
 		background.setColor(Color.BLACK);
+		
 		if(width != null && height != null) {
 			canvas.drawRect(0, 0, width, height, background);
+			drawBorders(canvas);
 		}
 		if(this.ball != null) {
 			this.ball.drawOnCanvas(canvas);
@@ -94,6 +98,14 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 		if(this.racket != null) {
 			this.racket.drawOnCanvas(canvas);
 		}
+		
+	}
+	
+	private void drawBorders(Canvas canvas) {
+		Paint paint = new Paint();
+		paint.setColor(Color.WHITE);
+		canvas.drawLine(limitLeft, 0, limitLeft, height, paint);
+		canvas.drawLine(limitRight, 0, limitRight, height, paint);
 	}
 	
 	@Override
@@ -108,13 +120,13 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 
 	@Override
 	public void inclineLeft(int value) {
-		int newX = Math.max(this.racket.getX()-value, 35 + (this.racket.getSize()/2));
+		int newX = Math.max(this.racket.getX()-value, limitLeft + (this.racket.getSize()/2));
 		this.racket.setX(newX);
 	}
 
 	@Override
 	public void inclineRight(int value) {
-		int newX = Math.min(this.racket.getX()+value, width - (this.racket.getSize()/2));
+		int newX = Math.min(this.racket.getX()+value, limitRight - (this.racket.getSize()/2));
 		this.racket.setX(newX);
 	}
 	
