@@ -6,7 +6,7 @@ public class Ball {
 	protected int y;
 	protected float speed;
 	protected float alpha;
-	
+
 	public Ball(int x, int y, float speed, float alpha) {
 		this.x = x;
 		this.y = y;
@@ -44,6 +44,22 @@ public class Ball {
 
 	public void setAlpha(float alpha) {
 		this.alpha = alpha;
+	}
+
+	public byte[] serialize() {
+		byte[] ser = new byte[4];
+		ser[0] = Integer.valueOf(x).byteValue();
+		ser[1] = Integer.valueOf(y).byteValue();
+		ser[2] = Float.valueOf(alpha).byteValue();
+		ser[3] = Float.valueOf(speed).byteValue();
+		return ser;
+	}
+
+	public void unserialize(byte[] serialized) {
+		this.x = serialized[0];
+		this.y = serialized[1];
+		this.alpha = serialized[2];
+		this.speed = serialized[3];
 	}
 
 }
