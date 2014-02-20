@@ -27,12 +27,13 @@
         android:text="Creer partie" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
+        android:onClick="joinMethod"
         android:text="Rejoindre partie" />
 
     <Button

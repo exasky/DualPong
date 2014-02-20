@@ -7,5 +7,6 @@
     <string name="credit">DualPong est une application développé par :
                             \n-Barreau Julien\n-Senhaji Ismail\n-Serin Kévin\n-Simar Jeremy.\n\n
                             Cette application a été développée lors du challenge TER du M2 DL 2013-2014".</string>
+    <string name="title_activity_join">JoinActivity</string>
 
 </resources>

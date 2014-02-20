@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.util.Log;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,6 +31,12 @@ public class MainActivity extends Activity {
 	public void exitMethod(View view){
 		Log.i(classTag, "exit app");
 		finish();
+	}
+	
+	public void joinMethod(View view){
+		Intent intent=new Intent(this,JoinActivity.class);
+		Log.i(classTag,"join party");
+		startActivity(intent);
 	}
 	
 	public void creditMethod(View view) {
