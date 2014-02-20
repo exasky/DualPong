@@ -2,6 +2,13 @@ package com.ups.dualpong.engine;
 
 public class BallEngine {
 
+	public static float getNewAngleOnTopWallBounce(float ballAngle) {
+
+		float newAngle = -180 + ballAngle;
+
+		return newAngle;
+	}
+
 	public static float getNewAngleOnWallBounce(float ballAngle) {
 		float newAngle = 0;
 		// Si la balle descend
