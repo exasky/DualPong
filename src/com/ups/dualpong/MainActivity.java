@@ -45,12 +45,12 @@ public class MainActivity extends Activity {
 		finish();
 	}
 
-	public void joinMethod(View view){
-		Intent intent=new Intent(this,JoinActivity.class);
-		Log.i(classTag,"join party");
+	public void joinMethod(View view) {
+		Intent intent = new Intent(this, JoinActivity.class);
+		Log.i(classTag, "join party");
 		startActivity(intent);
 	}
-	
+
 	public void creditMethod(View view) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Credits").setMessage(R.string.credit)
@@ -69,9 +69,10 @@ public class MainActivity extends Activity {
 	}
 
 	public void createGame(View view) {
-//		BTserver = new BluetoothServer(adapter);
-//		BTserver.start();
-		startActivity(new Intent(this, CreateActivity.class));
+		// BTserver = new BluetoothServer(adapter);
+		// BTserver.start();
+		// TODO a ne pas commit !!
+		startActivity(new Intent(this, GameActivity.class));
 	}
 
 	public void joinGame(View view) {
