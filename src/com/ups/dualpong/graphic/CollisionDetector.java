@@ -22,7 +22,7 @@ public class CollisionDetector {
 	}
 	
 	public boolean isCollisionWithRacket() {
-		boolean isSameY = (ball.getY() + ball.getRadius()) >= racket.getY();
+		boolean isSameY = (ball.getY() + ball.getRadius()) == racket.getY();
 		
 		boolean isSameX = (ball.getX() >= racket.getX()-racket.getSize()) && 
 				(ball.getX() <= racket.getX()+racket.getSize());
