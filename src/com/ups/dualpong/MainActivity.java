@@ -1,24 +1,36 @@
 package com.ups.dualpong;
 
+import java.util.Set;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.util.Log;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
+import com.ups.dualpong.bluetooth.BluetoothClient;
+import com.ups.dualpong.bluetooth.BluetoothServer;
+
 public class MainActivity extends Activity {
-	
+	BluetoothClient BTclient;
+	BluetoothServer BTserver;
+	BluetoothAdapter adapter;
+	BluetoothDevice device;
+
 	public String classTag = "MainActivity";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_main);
+		adapter = BluetoothAdapter.getDefaultAdapter();
 	}
 
 	@Override
@@ -27,11 +39,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	public void exitMethod(View view){
+
+	public void exitMethod(View view) {
 		Log.i(classTag, "exit app");
 		finish();
 	}
+<<<<<<< HEAD
 	
 	public void joinMethod(View view){
 		Intent intent=new Intent(this,JoinActivity.class);
@@ -39,6 +52,9 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+=======
+
+>>>>>>> 2c818d46fa83cbb9f7075dbda37b58baaab00efa
 	public void creditMethod(View view) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Credits").setMessage(R.string.credit)
@@ -54,5 +70,26 @@ public class MainActivity extends Activity {
 
 		// show it
 		alertDialog.show();
+	}
+
+	public void createGame(View view) {
+		BTserver = new BluetoothServer(adapter);
+		BTserver.start();
+
+	}
+
+	public void joinGame(View view) {
+		Set<BluetoothDevice> pairedDevices = adapter.getBondedDevices();
+		for (BluetoothDevice device : pairedDevices) {
+			// Je cherche celui dont j'ai besoin (en fait les 2 tel avec
+			// lesquels j'ai teste
+			if (device.getName().equals("HTC One S")) {
+				Log.d("Name connecte", device.getName());
+				this.device = device;
+			}
+		}
+		BTclient = new BluetoothClient(device, adapter, findViewById(
+				R.layout.activity_main).getWidth());
+		BTclient.start();
 	}
 }
