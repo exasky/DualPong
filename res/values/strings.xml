@@ -9,5 +9,6 @@
                             Cette application a été développée lors du challenge TER du M2 DL 2013-2014".</string>
     <string name="title_activity_join">JoinActivity</string>
     <string name="title_activity_game_activity">DualPong</string>
+    <string name="title_activity_create">CreateActivity</string>
 
 </resources>

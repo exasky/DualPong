@@ -30,6 +30,10 @@
             android:name="com.ups.dualpong.GameActivity"
             android:label="@string/title_activity_game_activity" >
         </activity>
+        <activity
+            android:name="com.ups.dualpong.CreateActivity"
+            android:label="@string/title_activity_create" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH" />

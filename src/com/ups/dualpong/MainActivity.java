@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 	public void createGame(View view) {
 //		BTserver = new BluetoothServer(adapter);
 //		BTserver.start();
-		startActivity(new Intent(this, GameActivity.class));
+		startActivity(new Intent(this, CreateActivity.class));
 	}
 
 	public void joinGame(View view) {
