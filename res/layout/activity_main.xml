@@ -33,12 +33,8 @@
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-<<<<<<< HEAD
         android:onClick="joinMethod"
         android:text="Rejoindre partie" />
-=======
-        android:text="Rejoindre partie" android:onClick="joinGame"/>
->>>>>>> 2c818d46fa83cbb9f7075dbda37b58baaab00efa
 
     <Button
         android:id="@+id/button4"

@@ -44,17 +44,13 @@ public class MainActivity extends Activity {
 		Log.i(classTag, "exit app");
 		finish();
 	}
-<<<<<<< HEAD
-	
+
 	public void joinMethod(View view){
 		Intent intent=new Intent(this,JoinActivity.class);
 		Log.i(classTag,"join party");
 		startActivity(intent);
 	}
 	
-=======
-
->>>>>>> 2c818d46fa83cbb9f7075dbda37b58baaab00efa
 	public void creditMethod(View view) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Credits").setMessage(R.string.credit)
