@@ -28,12 +28,14 @@ public class GameView extends ImageView implements TouchListener {
 	private GraphicBall ball;
 	private GraphicGauge gauge;
 	private GraphicRacket racket;
+	private boolean isTouching;
 	private Integer width = null;
 	private Integer height = null;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.refreshHandler = new Handler();
+		this.isTouching = false;
 		this.invalidatorRunnable = new Runnable() {
 			@Override
 			public void run() {
@@ -47,6 +49,12 @@ public class GameView extends ImageView implements TouchListener {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
+		
+		if(isTouching) {
+			this.gauge.increase();
+		} else {
+			this.gauge.decrease();
+		}
 		
 		drawGame(canvas);
 		refreshHandler.postDelayed(this.invalidatorRunnable, TIME_REFRESH);
@@ -90,12 +98,12 @@ public class GameView extends ImageView implements TouchListener {
 	
 	@Override
 	public void touchDown() {
-		Log.d("graphic", "toucheDown");
+		this.isTouching = true;
 	}
 
 	@Override
 	public void touchUp() {
-		Log.d("graphic", "toucheUp");
+		this.isTouching = false;
 	}
 	
 }
