@@ -74,7 +74,7 @@ public class BallEngine {
 		if (ballAngle > 0) {
 			if (ballAngle == 90) {
 				newVals[0] = x;
-				newVals[1] = y - 1;
+				newVals[1] = (int) (y - ballSpeed);
 			} else if (ballAngle < 90) {
 				double cos = Math.cos(ballAngle);
 				double sin = Math.sin(ballAngle);
@@ -89,7 +89,7 @@ public class BallEngine {
 		} else if (ballAngle < 0) {
 			if (ballAngle == -90) {
 				newVals[0] = x;
-				newVals[1] = y + 1;
+				newVals[1] = (int) (y + ballSpeed);
 			} else if (ballAngle < 90) {
 				double cos = Math.cos(-ballAngle);
 				double sin = Math.sin(-ballAngle);
