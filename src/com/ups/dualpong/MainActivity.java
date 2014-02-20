@@ -69,9 +69,8 @@ public class MainActivity extends Activity {
 	}
 
 	public void createGame(View view) {
-		// BTserver = new BluetoothServer(adapter);
-		// BTserver.start();
-		// TODO a ne pas commit !!
+//		BTserver = new BluetoothServer(adapter);
+//		BTserver.start();
 		startActivity(new Intent(this, GameActivity.class));
 	}
 

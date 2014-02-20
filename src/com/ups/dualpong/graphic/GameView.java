@@ -143,7 +143,9 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 		if(collisionDetector.isCollisionWithRacket()) {
 			alpha = BallEngine.getNewAngleOnRacketBounce(ball.getX(), racket.getX(), racket.getX());
 			ball.setAlpha(alpha);
+			Log.d("graphic", "*******detectColision: "+alpha+"************");
 		}
+		
 		if(collisionDetector.isCollisionWithLeftLimit() || collisionDetector.isCollisionWithRightLimit()) {
 			alpha = BallEngine.getNewAngleOnWallBounce(ball.getAlpha());
 			ball.setAlpha(alpha);
@@ -152,6 +154,7 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 		int[] pos = BallEngine.getNextPosition(ball.getX(), ball.getY(), ball.getAlpha(), ball.getSpeed());
 		ball.setX(pos[0]);
 		ball.setY(pos[1]);
+		Log.d("graphic", ball.getX()+";"+ball.getY());
 	}
 	
 }
