@@ -52,7 +52,7 @@ public class BallEngine {
 		float newAngle;
 
 		float anglePerStep = 90f / racketSize;
-		float rightSidePosition = racketPosition + racketSize / 2;
+		float rightSidePosition = racketPosition + (float) racketSize / 2;
 		float ballRacketDistance = Math.abs(ballXPosition - rightSidePosition);
 
 		newAngle = 45 + ballRacketDistance * anglePerStep;
@@ -78,13 +78,13 @@ public class BallEngine {
 			} else if (ballAngle < 90) {
 				double cos = Math.cos(ballAngle);
 				double sin = Math.sin(ballAngle);
-				newVals[0] = (int) (x + cos * ballSpeed);
-				newVals[1] = (int) (y - sin * ballSpeed);
+				newVals[0] = (int) (x + Math.abs(cos * ballSpeed));
+				newVals[1] = (int) (y - Math.abs(sin * ballSpeed));
 			} else if (ballAngle > 90) {
 				double cos = Math.cos(180 - ballAngle);
 				double sin = Math.sin(180 - ballAngle);
-				newVals[0] = (int) (x - cos * ballSpeed);
-				newVals[1] = (int) (y - sin * ballSpeed);
+				newVals[0] = (int) (x - Math.abs(cos * ballSpeed));
+				newVals[1] = (int) (y - Math.abs(sin * ballSpeed));
 			}
 		} else if (ballAngle < 0) {
 			if (ballAngle == -90) {
@@ -93,13 +93,13 @@ public class BallEngine {
 			} else if (ballAngle < 90) {
 				double cos = Math.cos(-ballAngle);
 				double sin = Math.sin(-ballAngle);
-				newVals[0] = (int) (x - cos * ballSpeed);
-				newVals[1] = (int) (y + sin * ballSpeed);
+				newVals[0] = (int) (x - Math.abs(cos * ballSpeed));
+				newVals[1] = (int) (y + Math.abs(sin * ballSpeed));
 			} else if (ballAngle > 90) {
 				double cos = Math.cos(180 - ballAngle);
 				double sin = Math.sin(180 - ballAngle);
-				newVals[0] = (int) (x + cos * ballSpeed);
-				newVals[1] = (int) (y + sin * ballSpeed);
+				newVals[0] = (int) (x + Math.abs(cos * ballSpeed));
+				newVals[1] = (int) (y + Math.abs(sin * ballSpeed));
 			}
 		}
 
