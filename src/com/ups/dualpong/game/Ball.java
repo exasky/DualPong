@@ -7,6 +7,9 @@ public class Ball {
 	protected float speed;
 	protected float alpha;
 
+	public Ball() {
+	}
+
 	public Ball(int x, int y, float speed, float alpha) {
 		this.x = x;
 		this.y = y;
@@ -55,9 +58,11 @@ public class Ball {
 		return ser;
 	}
 
-	public void unserialize(byte[] serialized) {
-		this.x = serialized[0];
+	public void unserialize(byte[] serialized, int newWidth) {
+		float percent = serialized[0];
+		this.x = Integer.valueOf((int) percent * newWidth);
 		this.y = serialized[1];
+		// TODO modifier l'angle
 		this.alpha = serialized[2];
 		this.speed = serialized[3];
 	}

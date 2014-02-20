@@ -18,20 +18,16 @@ public class BluetoothClient extends Thread {
 	private final BluetoothSocket blueSocket;
 	private final BluetoothDevice blueDevice;
 	private BluetoothAdapter blueAdapter;
+	private int viewWidth;
 
-	public BluetoothClient(BluetoothDevice device, BluetoothAdapter blueAdapter_) {
-		// On utilise un objet temporaire car blueSocket et blueDevice sont
-		// "final"
+	public BluetoothClient(BluetoothDevice device,
+			BluetoothAdapter blueAdapter_, int viewWidth) {
 		BluetoothSocket tmp = null;
 		blueDevice = device;
 		blueAdapter = blueAdapter_;
+		this.viewWidth = viewWidth;
 
-		// On r��cup��re un objet BluetoothSocket gr��ce �� l'objet
-		// BluetoothDevice
 		try {
-			// MON_UUID est l'UUID (comprenez identifiant serveur) de
-			// l'application. Cette valeur est n��cessaire c��t�� serveur
-			// ��galement !
 			tmp = blueDevice.createRfcommSocketToServiceRecord(UUID
 					.fromString("c065af87-b800-4bb3-a932-c4c130f2a50d"));
 		} catch (IOException e) {
@@ -42,30 +38,20 @@ public class BluetoothClient extends Thread {
 	@Override
 	public void run() {
 		Log.d("thread client", "run started");
-		// On annule la d��couverte des p��riph��riques (inutile puisqu'on est
-		// en train d'essayer de se connecter)
 		blueAdapter.cancelDiscovery();
 
 		try {
-			// On se connecte. Cet appel est bloquant jusqu'�� la r��ussite ou
-			// la lev��e d'une erreur
 			blueSocket.connect();
 		} catch (IOException connectException) {
-			// Impossible de se connecter, on ferme la socket et on tue le
-			// thread
 			try {
 				blueSocket.close();
 			} catch (IOException closeException) {
 			}
 			return;
 		}
-
-		// Utilisez la connexion (dans un thread s��par��) pour faire ce que
-		// vous voulez
 		manageConnectedSocket(blueSocket);
 	}
 
-	// Annule toute connexion en cours et tue le thread
 	public void cancel() {
 		try {
 			blueSocket.close();
@@ -73,13 +59,17 @@ public class BluetoothClient extends Thread {
 		}
 	}
 
+	// TODO Envoyer la bonne ball ;)
 	public void manageConnectedSocket(BluetoothSocket blueSocket) {
 		Log.i("BTClient", "ManageConnectedSocket");
 		try {
 			OutputStream out = blueSocket.getOutputStream();
 			Ball ball = new Ball(5, 10, 20, 30);
 
-			byte[] tmp = new String("test").getBytes("UTF-8");
+			byte[] tmp = ball.serialize();
+			int x = tmp[0];
+			tmp[0] = Float.valueOf((x * 100) / this.viewWidth).byteValue();
+
 			out.write(tmp);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -58,7 +58,8 @@ public class MainActivity extends Activity {
 				this.device = device;
 			}
 		}
-		BTclient = new BluetoothClient(device, adapter);
+		BTclient = new BluetoothClient(device, adapter, findViewById(
+				R.layout.activity_main).getWidth());
 		BTclient.start();
 	}
 }
