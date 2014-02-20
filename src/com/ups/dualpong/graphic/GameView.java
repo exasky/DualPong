@@ -3,6 +3,7 @@
  */
 package com.ups.dualpong.graphic;
 
+import com.ups.dualpong.engine.BallEngine;
 import com.ups.dualpong.game.Ball;
 import com.ups.dualpong.game.Gauge;
 import com.ups.dualpong.game.Racket;
@@ -15,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -33,6 +35,7 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	private boolean isTouching;
 	private Integer width = null;
 	private Integer height = null;
+	private CollisionDetector collisionDetector;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -56,6 +59,8 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 			this.gauge.decrease();
 		}
 		
+		changeBallPosition();
+		
 		drawGame(canvas);
 		refreshHandler.postDelayed(this.invalidatorRunnable, TIME_REFRESH);
 	}
@@ -77,8 +82,11 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 		this.gauge.setRight(30);
 		this.gauge.setBottom(height-100);
 		this.ball = new GraphicBall(new Ball(width / 2, 10, 0, 0));
+		this.ball.setSpeed(5);
+		this.ball.setAlpha(-90);
 		this.racket = new GraphicRacket(new Racket(width / 2, (int) (0.2*width)));
 		this.racket.setY(height-20);
+		this.collisionDetector = new CollisionDetector(ball, racket, limitRight, limitLeft);
 	}
 	
 	private void drawGame(Canvas canvas) {
@@ -128,6 +136,18 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	public void inclineRight(int value) {
 		int newX = Math.min(this.racket.getX()+value, limitRight - (this.racket.getSize()/2));
 		this.racket.setX(newX);
+	}
+	
+	private void changeBallPosition() {
+		if(collisionDetector.isCollisionWithRacket()) {
+			float alpha = BallEngine.getNewAngleOnRacketBounce(ball.getX(), racket.getX(), racket.getX());
+			ball.setAlpha(alpha);
+			Log.d("graphic", alpha+"");
+		}
+		
+		int[] pos = BallEngine.getNextPosition(ball.getX(), ball.getY(), ball.getAlpha(), ball.getSpeed());
+		ball.setX(pos[0]);
+		ball.setY(pos[1]);
 	}
 	
 }
