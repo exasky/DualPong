@@ -9,9 +9,8 @@ public class Ball {
 	protected float speed;
 	protected float alpha;
 
-	public Ball() {
-	}
-
+    public Ball(){  }
+	
 	public Ball(int x, int y, float speed, float alpha) {
 		this.x = x;
 		this.y = y;

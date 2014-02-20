@@ -45,12 +45,12 @@ public class MainActivity extends Activity {
 		finish();
 	}
 
-	public void joinMethod(View view) {
-		Intent intent = new Intent(this, JoinActivity.class);
-		Log.i(classTag, "join party");
-		startActivity(intent);
-	}
-
+//	public void joinMethod(View view){
+//		Intent intent=new Intent(this,JoinActivity.class);
+//		Log.i(classTag,"join party");
+//		startActivity(intent);
+//	}
+	
 	public void creditMethod(View view) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Credits").setMessage(R.string.credit)
@@ -71,21 +71,10 @@ public class MainActivity extends Activity {
 	public void createGame(View view) {
 //		BTserver = new BluetoothServer(adapter);
 //		BTserver.start();
-		startActivity(new Intent(this, GameActivity.class));
+		startActivity(new Intent(this, CreateActivity.class));
 	}
 
 	public void joinGame(View view) {
-		Set<BluetoothDevice> pairedDevices = adapter.getBondedDevices();
-		for (BluetoothDevice device : pairedDevices) {
-			// Je cherche celui dont j'ai besoin (en fait les 2 tel avec
-			// lesquels j'ai teste
-			if (device.getName().equals("HTC One S")) {
-				Log.d("Name connecte", device.getName());
-				this.device = device;
-			}
-		}
-		BTclient = new BluetoothClient(device, adapter, findViewById(
-				R.layout.activity_main).getWidth());
-		BTclient.start();
-	}
+        startActivity(new Intent(this, JoinActivity.class));
+    }
 }

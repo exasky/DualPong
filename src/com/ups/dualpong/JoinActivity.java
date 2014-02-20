@@ -1,15 +1,55 @@
 package com.ups.dualpong;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import com.ups.dualpong.bluetooth.BluetoothClient;
+
+import java.util.Set;
 
 public class JoinActivity extends Activity {
+    private ListView devicesListView;
+    private BluetoothAdapter BTadapter;
+    private ArrayAdapter<String> ARadapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.join_activity);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.join_activity);
+        devicesListView = (ListView)findViewById(R.id.deviceListView);
+
+
+        BTadapter = BluetoothAdapter.getDefaultAdapter();
+        if (BTadapter != null){
+            if (!BTadapter.isEnabled())
+                BTadapter.enable();
+            Set<BluetoothDevice> pairedDevices = BTadapter.getBondedDevices();
+            String[] devicesStr = new String[pairedDevices.size()];
+
+            int i=0;
+            for (BluetoothDevice device : pairedDevices) {
+                devicesStr[i] = device.getName()+" "+device.getAddress();
+                i++;
+            }
+            ARadapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_list_item_1, android.R.id.text1,
+                    devicesStr);
+
+            devicesListView.setAdapter(ARadapter);
+
+            devicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    connectDevice(adapterView, view, i, l);
+                }
+            });
+        }
 	}
 
 	@Override
@@ -19,4 +59,12 @@ public class JoinActivity extends Activity {
 		return true;
 	}
 
+    public void connectDevice(AdapterView<?> adapterView, View view, int i, long l){
+        String dev = (String)adapterView.getAdapter().getItem(i);
+
+        BluetoothDevice device = BTadapter.getRemoteDevice(dev.split(" ")[1]);
+
+        BluetoothClient BTclient = new BluetoothClient(device, BTadapter, this);
+        BTclient.start();
+    }
 }

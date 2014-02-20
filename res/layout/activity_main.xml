@@ -33,7 +33,7 @@
         android:layout_below="@+id/buttonCancel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
-        android:onClick="joinMethod"
+        android:onClick="joinGame"
         android:text="Rejoindre partie" />
 
     <Button

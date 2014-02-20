@@ -15,16 +15,22 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.MotionEvent;
-
+import com.ups.dualpong.bluetooth.BluetoothClient;
+import com.ups.dualpong.bluetooth.BluetoothServer;
 /**
  * @author SERIN Kevin
  *
  */
 public class GameActivity extends Activity implements SensorEventListener {
+    public enum PlayerType {server, client}
 	private TouchNotifier touchNotifier = new TouchNotifier();
 	private InclinationNotifier inclinationNotifier = new InclinationNotifier();
 	private SensorManager sensorManager;
-	
+
+    private PlayerType current;
+    private BluetoothServer BTserver;
+    private BluetoothClient BTclient;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +47,15 @@ public class GameActivity extends Activity implements SensorEventListener {
 		GameView gameView = (GameView) findViewById(R.id.gameView1);
 		touchNotifier.addListener(gameView);
 		inclinationNotifier.addListener(gameView);
+
+        //bluetooth setting up
+        BTserver = BluetoothServer.getInstance();
+        BTclient = BluetoothClient.getInstance();
+        if (BTserver != null){
+            current = PlayerType.server;
+        }else{
+            current = PlayerType.server;
+        }
 	}
 	
 	@Override
