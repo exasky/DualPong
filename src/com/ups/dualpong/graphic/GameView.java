@@ -36,11 +36,13 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	private Integer width = null;
 	private Integer height = null;
 	private CollisionDetector collisionDetector;
+	private boolean ballOnRacket;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.refreshHandler = new Handler();
 		this.isTouching = false;
+		this.ballOnRacket = false;
 		this.invalidatorRunnable = new Runnable() {
 			@Override
 			public void run() {
@@ -53,17 +55,26 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		
-		if(isTouching) {
-			this.gauge.increase();
-		} else {
-			this.gauge.decrease();
-		}
-		
+		this.calculateGauge();
 		changeBallPosition();
 		
 		drawGame(canvas);
 		refreshHandler.postDelayed(this.invalidatorRunnable, TIME_REFRESH);
 	}
+	
+	private void calculateGauge() {
+		if(!ballOnRacket) {
+			if(isTouching) {
+				this.gauge.increase();
+			} else {
+				this.gauge.decrease();
+			}
+		}
+		else {
+			this.gauge.bigDecrease();
+		}
+	}
+	
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {		
 		if(this.width == null || this.height == null) {	// first initialization of the screen
@@ -124,6 +135,10 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	@Override
 	public void touchUp() {
 		this.isTouching = false;
+		if(ballOnRacket) {
+			this.ballOnRacket = false;
+			this.ball.setSpeed(5 + (gauge.getCurrent()*15 / (Gauge.MAX - Gauge.MIN)));
+		}
 	}
 
 	@Override
@@ -139,36 +154,43 @@ public class GameView extends ImageView implements TouchListener, InclinationLis
 	}
 	
 	private void changeBallPosition() {
-		float alpha;
-		boolean collision = false;
-		if(collisionDetector.isCollisionWithRacket()) {
-			alpha = BallEngine.getNewAngleOnRacketBounce(ball.getX(), racket.getX(), racket.getX());
-			ball.setAlpha(alpha);	
-			collision = true;
-		}
+		if(!ballOnRacket) {
 		
-		if(collisionDetector.isCollisionWithLeftLimit() || collisionDetector.isCollisionWithRightLimit()) {
-			Log.d("graphic", "COLLISION: "+ball.getAlpha());
-			alpha = BallEngine.getNewAngleOnWallBounce(ball.getAlpha());
-			ball.setAlpha(alpha);
-			collision = true;
-			Log.d("graphic", "COLLISION: "+alpha);
+			float alpha;
+			boolean collision = false;
+			if(collisionDetector.isCollisionWithRacket()) {
+				alpha = BallEngine.getNewAngleOnRacketBounce(ball.getX(), racket.getX(), racket.getX());
+				ball.setAlpha(alpha);	
+				collision = true;
+				
+				if(isTouching) {
+					this.ballOnRacket = true;
+				}
+				else {
+					this.calculateGauge();
+				}
+			}
+			
+			if(collisionDetector.isCollisionWithLeftLimit() || collisionDetector.isCollisionWithRightLimit()) {
+				Log.d("graphic", "COLLISION: "+ball.getAlpha());
+				alpha = BallEngine.getNewAngleOnWallBounce(ball.getAlpha());
+				ball.setAlpha(alpha);
+				collision = true;
+			}
+			
+			int[] pos = BallEngine.getNextPosition(ball.getX(), ball.getY(), ball.getAlpha(), ball.getSpeed());
+			int x = pos[0];
+			int y = pos[1];
+			if(collision) {
+				if(x <= limitLeft+ball.getRadius())
+					x = limitLeft+ball.getRadius()+1;
+				if(x >= limitRight-ball.getRadius())
+					x = limitRight-ball.getRadius()+1;
+			}
+			
+			ball.setX(x);
+			ball.setY(y);
 		}
-		
-		int[] pos = BallEngine.getNextPosition(ball.getX(), ball.getY(), ball.getAlpha(), ball.getSpeed());
-		int x = pos[0];
-		int y = pos[1];
-		Log.d("graphic", ball.getX()+";"+ball.getY());
-		if(collision) {
-			if(x <= limitLeft+ball.getRadius())
-				x = limitLeft+ball.getRadius()+1;
-			if(x >= limitRight-ball.getRadius())
-				x = limitRight-ball.getRadius()+1;
-		}
-		
-		ball.setX(x);
-		ball.setY(y);
-		Log.d("graphic", ball.getX()+";"+ball.getY());
 	}
 	
 }

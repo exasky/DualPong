@@ -67,5 +67,18 @@ public class Gauge {
 		}
 		
 	}
+	
+	public void bigDecrease() {
+		long currentTime = SystemClock.elapsedRealtime();
+		if(this.lastTimeDecrease == null) {
+			this.lastTimeIncrease = null;
+			this.current = Math.max(this.current-10, MIN);
+			this.lastTimeDecrease = currentTime;
+		}
+		else if(currentTime - this.lastTimeDecrease >= TIME) {
+			this.current = Math.max(this.current-10, MIN);
+			this.lastTimeDecrease = currentTime;
+		}
+	}
 
 }
