@@ -15,11 +15,11 @@ public class BallEngine {
 		if (ballAngle < 0) {
 			// Si elle descend vers la droite
 			if (ballAngle < -90 && ballAngle > -180) {
-				newAngle = 180 - ballAngle;
+				newAngle = -180 - ballAngle;
 			}
 			// Si elle descnend vers la gauche
 			else if (ballAngle > -90) {
-				newAngle = 180 - ballAngle;
+				newAngle = -180 - ballAngle;
 			}
 			// Si elle descend tout droit
 			else if (ballAngle == -90) {
