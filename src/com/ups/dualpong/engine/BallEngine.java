@@ -60,4 +60,9 @@ public class BallEngine {
 		return newAngle;
 
 	}
+
+	public static float getNewAngleOnDeviceChanged(int ballAngle) {
+
+		return -ballAngle;
+	}
 }
