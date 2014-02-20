@@ -4,5 +4,8 @@
     <string name="app_name">DualPong</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="credit">DualPong est une application développé par :
+                            \n-Barreau Julien\n-Senhaji Ismail\n-Serin Kévin\n-Simar Jeremy.\n\n
+                            Cette application a été développée lors du challenge TER du M2 DL 2013-2014".</string>
 
 </resources>
