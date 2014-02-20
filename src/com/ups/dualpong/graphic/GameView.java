@@ -6,6 +6,7 @@ package com.ups.dualpong.graphic;
 import com.ups.dualpong.game.Ball;
 import com.ups.dualpong.game.Gauge;
 import com.ups.dualpong.game.Racket;
+import com.ups.dualpong.interactions.InclinationListener;
 import com.ups.dualpong.interactions.TouchListener;
 
 import android.content.Context;
@@ -14,14 +15,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 
 /**
  * @author SERIN Kevin
  *
  */
-public class GameView extends ImageView implements TouchListener {
+public class GameView extends ImageView implements TouchListener, InclinationListener {
 	private static final int TIME_REFRESH = 50;
 	private Handler refreshHandler;
 	private Runnable invalidatorRunnable;
@@ -104,6 +104,18 @@ public class GameView extends ImageView implements TouchListener {
 	@Override
 	public void touchUp() {
 		this.isTouching = false;
+	}
+
+	@Override
+	public void inclineLeft(int value) {
+		int newX = Math.max(this.racket.getX()-value, 35 + (this.racket.getSize()/2));
+		this.racket.setX(newX);
+	}
+
+	@Override
+	public void inclineRight(int value) {
+		int newX = Math.min(this.racket.getX()+value, width - (this.racket.getSize()/2));
+		this.racket.setX(newX);
 	}
 	
 }

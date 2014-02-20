@@ -26,6 +26,10 @@
             android:name="com.ups.dualpong.JoinActivity"
             android:label="@string/title_activity_join" >
         </activity>
+        <activity
+            android:name="com.ups.dualpong.GameActivity"
+            android:label="@string/title_activity_game_activity" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
