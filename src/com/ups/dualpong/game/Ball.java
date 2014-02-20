@@ -1,5 +1,7 @@
 package com.ups.dualpong.game;
 
+import com.ups.dualpong.engine.BallEngine;
+
 public class Ball {
 
 	protected int x;
@@ -62,8 +64,7 @@ public class Ball {
 		float percent = serialized[0];
 		this.x = Integer.valueOf((int) percent * newWidth);
 		this.y = serialized[1];
-		// TODO modifier l'angle
-		this.alpha = serialized[2];
+		this.alpha = BallEngine.getNewAngleOnDeviceChanged(serialized[2]);
 		this.speed = serialized[3];
 	}
 
