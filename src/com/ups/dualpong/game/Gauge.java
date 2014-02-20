@@ -10,6 +10,10 @@ public class Gauge {
 	public Gauge() {
 		this.current = 0;
 	}
+	
+	public Gauge(int current) {
+		this.current = current;
+	}
 
 	public int getCurrent() {
 		return current;

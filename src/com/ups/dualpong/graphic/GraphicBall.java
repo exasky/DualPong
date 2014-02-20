@@ -14,9 +14,10 @@ public class GraphicBall extends Ball implements GraphicElement {
 	public GraphicBall(Ball ball) {
 		super(ball.getX(), ball.getY(), ball.getSpeed(), ball.getAlpha());
 		
-		this.radius = 5;
+		this.radius = 10;
 		this.color = Color.WHITE;
 		this.paint = new Paint();
+		this.paint.setAntiAlias(true);
 	}
 	
 	public int getRadius() {

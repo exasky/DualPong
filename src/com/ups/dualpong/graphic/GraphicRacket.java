@@ -29,6 +29,30 @@ public class GraphicRacket extends Racket implements GraphicElement {
 		this.y = 50;	
 	}
 	
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
 	@Override
 	public void drawOnCanvas(Canvas canvas) {
 		this.paint.setColor(this.color);

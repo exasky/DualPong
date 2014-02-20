@@ -9,8 +9,11 @@ import com.ups.dualpong.game.Racket;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -24,6 +27,8 @@ public class GameView extends ImageView {
 	private GraphicBall ball;
 	private GraphicGauge gauge;
 	private GraphicRacket racket;
+	private Integer width = null;
+	private Integer height = null;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -35,9 +40,7 @@ public class GameView extends ImageView {
 			}
 		};
 		
-		this.ball = new GraphicBall(new Ball(10, 10, 0, 0));
-		this.gauge = new GraphicGauge(new Gauge());
-		this.racket = new GraphicRacket(new Racket(50, 10));
+		//this.initGraphicalElements();
 	}
 	
 	@Override
@@ -47,11 +50,41 @@ public class GameView extends ImageView {
 		drawGame(canvas);
 		refreshHandler.postDelayed(this.invalidatorRunnable, TIME_REFRESH);
 	}
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {		
+		if(this.width == null || this.height == null) {	// first initialization of the screen
+			this.width = w;
+			this.height = h;
+			this.initGraphicalElements();
+		}
+	}
+	
+	private void initGraphicalElements() {		
+		this.gauge = new GraphicGauge(new Gauge((Gauge.MAX - Gauge.MIN) / 2 + Gauge.MIN));
+		this.gauge.setLeft(10);
+		this.gauge.setTop(50);
+		this.gauge.setRight(30);
+		this.gauge.setBottom(height-100);
+		this.ball = new GraphicBall(new Ball(width / 2, 10, 0, 0));
+		this.racket = new GraphicRacket(new Racket(width / 2, (int) (0.2*width)));
+		this.racket.setY(height-20);
+	}
 	
 	private void drawGame(Canvas canvas) {
-		this.ball.drawOnCanvas(canvas);
-		this.gauge.drawOnCanvas(canvas);
-		this.racket.drawOnCanvas(canvas);
+		Paint background = new Paint();
+		background.setColor(Color.BLACK);
+		if(width != null && height != null) {
+			canvas.drawRect(0, 0, width, height, background);
+		}
+		if(this.ball != null) {
+			this.ball.drawOnCanvas(canvas);
+		}
+		if(this.gauge != null) {
+			this.gauge.drawOnCanvas(canvas);
+		}
+		if(this.racket != null) {
+			this.racket.drawOnCanvas(canvas);
+		}
 	}
 	
 }
