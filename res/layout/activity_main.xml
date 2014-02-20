@@ -18,25 +18,6 @@
         android:src="@drawable/logo" />
 
     <Button
-        android:id="@+id/buttonCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="Creer partie" android:onClick="createGame"/>
-
-    <Button
-        android:id="@+id/buttonJoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonCancel"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:onClick="joinGame"
-        android:text="Rejoindre partie" />
-
-    <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,5 +35,34 @@
         android:layout_toLeftOf="@+id/buttonCancel"
         android:onClick="creditMethod"
         android:text="Credits" />
+
+    <Button
+        android:id="@+id/buttonJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp"
+        android:onClick="joinGame"
+        android:text="Rejoindre partie" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonJoin"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_marginBottom="20dp"
+        android:onClick="createGame"
+        android:text="Creer partie" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="launchSolo"
+        android:text="Solo player" />
 
 </RelativeLayout>

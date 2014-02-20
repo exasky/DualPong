@@ -1,7 +1,5 @@
 package com.ups.dualpong;
 
-import java.util.Set;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -45,12 +43,12 @@ public class MainActivity extends Activity {
 		finish();
 	}
 
-//	public void joinMethod(View view){
-//		Intent intent=new Intent(this,JoinActivity.class);
-//		Log.i(classTag,"join party");
-//		startActivity(intent);
-//	}
-	
+	// public void joinMethod(View view){
+	// Intent intent=new Intent(this,JoinActivity.class);
+	// Log.i(classTag,"join party");
+	// startActivity(intent);
+	// }
+
 	public void creditMethod(View view) {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setTitle("Credits").setMessage(R.string.credit)
@@ -68,13 +66,17 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	}
 
+	public void launchSolo(View view) {
+		startActivity(new Intent(this, GameActivity.class));
+	}
+
 	public void createGame(View view) {
-//		BTserver = new BluetoothServer(adapter);
-//		BTserver.start();
+		// BTserver = new BluetoothServer(adapter);
+		// BTserver.start();
 		startActivity(new Intent(this, CreateActivity.class));
 	}
 
 	public void joinGame(View view) {
-        startActivity(new Intent(this, JoinActivity.class));
-    }
+		startActivity(new Intent(this, JoinActivity.class));
+	}
 }
