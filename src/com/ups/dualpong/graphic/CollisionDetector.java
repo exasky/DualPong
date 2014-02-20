@@ -45,5 +45,9 @@ public class CollisionDetector {
 	public boolean isCollisionWithTop() {
 		return ball.getY() <= 0;
 	}
+	
+	public boolean isCollisionOnTop() {
+		return (ball.getY() - ball.getRadius() <= 0);
+	}
 
 }
