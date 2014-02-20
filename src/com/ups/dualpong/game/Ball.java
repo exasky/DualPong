@@ -2,10 +2,17 @@ package com.ups.dualpong.game;
 
 public class Ball {
 
-	private int x;
-	private int y;
-	private float speed;
-	private float alpha;
+	protected int x;
+	protected int y;
+	protected float speed;
+	protected float alpha;
+	
+	public Ball(int x, int y, float speed, float alpha) {
+		this.x = x;
+		this.y = y;
+		this.speed = speed;
+		this.alpha = alpha;
+	}
 
 	public int getX() {
 		return x;
