@@ -3,8 +3,11 @@ package com.ups.dualpong.engine;
 public class BallEngine {
 
 	public static float getNewAngleOnTopWallBounce(float ballAngle) {
-
-		float newAngle = -180 + ballAngle;
+		float newAngle;
+		if (ballAngle > 0)
+			newAngle = -180 + ballAngle;
+		else
+			newAngle = 180 + ballAngle;
 
 		return newAngle;
 	}
